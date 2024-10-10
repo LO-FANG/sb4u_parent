@@ -1,6 +1,10 @@
 package com.drizzle.sb4u.service.contract.service;
 
-import com.drizzle.sb4u.service.contract.entity.ContractBase;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.drizzle.sb4u.common.base.result.PageParams;
+import com.drizzle.sb4u.service.contract.entity.dto.QueryContractBaseDto;
+import com.drizzle.sb4u.service.contract.entity.po.ContractBase;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -13,4 +17,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ContractBaseService extends IService<ContractBase> {
 
+    IPage<ContractBase> selectPage(PageParams pageParams, QueryContractBaseDto contractQueryVo);
 }

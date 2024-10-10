@@ -1,12 +1,16 @@
 package com.drizzle.sb4u.service.contract.service.impl;
 
-import com.drizzle.sb4u.service.contract.entity.ContractBase;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.drizzle.sb4u.common.base.result.PageParams;
+import com.drizzle.sb4u.service.contract.entity.dto.QueryContractBaseDto;
+import com.drizzle.sb4u.service.contract.entity.po.ContractBase;
 import com.drizzle.sb4u.service.contract.mapper.ContractBaseMapper;
 import com.drizzle.sb4u.service.contract.service.ContractBaseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 
 /**
@@ -22,6 +26,30 @@ public class ContractBaseServiceImpl extends ServiceImpl<ContractBaseMapper, Con
     @Resource
     private ContractBaseMapper contractBaseMapper;
 
+    @Override
+    public IPage<ContractBase> selectPage(PageParams pageParams, QueryContractBaseDto contractQueryVo) {
 
+        LambdaQueryWrapper<ContractBase> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        // 公司名称
+        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getCompanyName()), ContractBase::getCompanyName, contractQueryVo.getCompanyName());
+        // 合约标签
+        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getTag()), ContractBase::getTag, contractQueryVo.getTag());
+        // 大分类
+        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getMt()), ContractBase::getMt, contractQueryVo.getMt());
+        // 小分类
+        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getSt()), ContractBase::getSt, contractQueryVo.getSt());
+        // 合约等级
+        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getGrade()), ContractBase::getGrade, contractQueryVo.getGrade());
+        // 合约名称
+        lambdaQueryWrapper.like(StringUtils.isNotEmpty(contractQueryVo.getName()), ContractBase::getName, contractQueryVo.getName());
+        // 审核状态
+        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getAuditStatus()), ContractBase::getAuditStatus, contractQueryVo.getAuditStatus());
+        // 发布状态
+        lambdaQueryWrapper.eq(contractQueryVo.getPublishStatus() != null, ContractBase::getPublishStatus, contractQueryVo.getPublishStatus());
 
+        Page<ContractBase> page = new Page<>(pageParams.getPageNo(), pageParams.getPageSize());
+        IPage<ContractBase> contractBasePage = contractBaseMapper.selectPage(page, lambdaQueryWrapper);
+        long total = contractBasePage.getTotal();
+        return contractBasePage;
+    }
 }

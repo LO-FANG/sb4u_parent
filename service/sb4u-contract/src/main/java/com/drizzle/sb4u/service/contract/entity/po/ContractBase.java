@@ -1,4 +1,4 @@
-package com.drizzle.sb4u.service.contract.entity;
+package com.drizzle.sb4u.service.contract.entity.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.drizzle.sb4u.service.base.model.BaseEntity;
@@ -24,6 +24,9 @@ import lombok.EqualsAndHashCode;
 public class ContractBase extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty(value = "合约名称")
+    private String name;
 
     @ApiModelProperty(value = "公司id")
     private Long companyId;
@@ -62,6 +65,4 @@ public class ContractBase extends BaseEntity {
     @TableField("is_deleted")
     @TableLogic
     private Boolean deleted;
-
-
 }

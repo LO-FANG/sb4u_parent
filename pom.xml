@@ -10,7 +10,6 @@
     <description>sb4u_parent</description>
     <modules>
         <module>common</module>
-        <module>common/common_util</module>
         <module>service</module>
     </modules>
     <properties>

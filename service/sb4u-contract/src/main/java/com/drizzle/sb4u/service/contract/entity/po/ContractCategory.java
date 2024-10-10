@@ -1,4 +1,4 @@
-package com.drizzle.sb4u.service.contract.entity;
+package com.drizzle.sb4u.service.contract.entity.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;

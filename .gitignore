@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### log file ###
+sb4u_log/

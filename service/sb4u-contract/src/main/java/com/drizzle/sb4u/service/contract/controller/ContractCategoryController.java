@@ -1,13 +1,7 @@
 package com.drizzle.sb4u.service.contract.controller;
 
 
-import com.drizzle.sb4u.service.contract.entity.ContractBase;
-import com.drizzle.sb4u.service.contract.service.ContractBaseService;
-import org.apache.ibatis.annotations.Delete;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * <p>

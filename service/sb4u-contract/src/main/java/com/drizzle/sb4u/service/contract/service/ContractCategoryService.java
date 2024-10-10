@@ -1,6 +1,6 @@
 package com.drizzle.sb4u.service.contract.service;
 
-import com.drizzle.sb4u.service.contract.entity.ContractCategory;
+import com.drizzle.sb4u.service.contract.entity.po.ContractCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

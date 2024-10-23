@@ -25,8 +25,9 @@ import java.util.List;
  * @author drizzle
  * @since 2024-10-08
  */
+@CrossOrigin
 @RestController
-@RequestMapping("admin/contract/contract-base")
+@RequestMapping("admin/sb4u/contract")
 public class ContractBaseController {
 
     @Autowired
@@ -39,6 +40,16 @@ public class ContractBaseController {
         return R.ok().data("items", list);
     }
 
+    @ApiOperation("所有智能合约列表")
+    @GetMapping("/get/{id}")
+    public R getById(@ApiParam(value = "合约id", required = true) @PathVariable String id) {
+        ContractBase contractBase = contractBaseService.getById(id);
+        if(contractBase != null) {
+            return R.ok().data("item", contractBase);
+        } else {
+            return R.error().message("数据不存在");
+        }
+    }
 
     @ApiOperation(value = "根据ID删除智能合约", notes = "根据ID删除智能合约")
     @DeleteMapping("/remove/{id}")
@@ -52,9 +63,14 @@ public class ContractBaseController {
     }
 
     @ApiOperation(value = "获取合约分页列表", notes = "获取合约分页列表")
-    @GetMapping("/listpage")
-    public R listPage(PageParams pageParams,
+    @GetMapping("/listpage/{pageNo}/{pageSize}")
+    public R listPage(@PathVariable Long pageNo, @PathVariable Long pageSize,
                       @ApiParam("contract查询条件对象") QueryContractBaseDto queryContractBaseDto) {
+        PageParams pageParams = new PageParams();
+        if(pageNo != null && pageSize != null) {
+            pageParams.setPageNo(pageNo);
+            pageParams.setPageSize(pageSize);
+        }
         IPage<ContractBase> pageResult = contractBaseService.selectPage(pageParams, queryContractBaseDto);
         List<ContractBase> contractBaseList =pageResult.getRecords();
 
@@ -81,13 +97,13 @@ public class ContractBaseController {
     }
 
     @ApiOperation(value = "新增合约信息", notes = "新增合约信息")
-    @PostMapping("/add")
+    @PostMapping("/save")
     public R add(@ApiParam("新增合约信息") @RequestBody AddContractBaseDto addContractBaseDto) {
         ContractBase contractBase = new ContractBase();
         BeanUtils.copyProperties(addContractBaseDto, contractBase);
 
         contractBase.setAuditStatus("80001");
-        contractBase.setPublishStatus(0);
+        contractBase.setPublishStatus("90001");
 
         boolean save = contractBaseService.save(contractBase);
 

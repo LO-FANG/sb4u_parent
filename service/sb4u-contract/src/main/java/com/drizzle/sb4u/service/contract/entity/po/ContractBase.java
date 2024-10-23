@@ -1,5 +1,6 @@
 package com.drizzle.sb4u.service.contract.entity.po;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.drizzle.sb4u.service.base.model.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableLogic;
@@ -34,8 +35,12 @@ public class ContractBase extends BaseEntity {
     @ApiModelProperty(value = "公司名称")
     private String companyName;
 
-    @ApiModelProperty(value = "合约标签")
-    private String tag;
+    @ApiModelProperty(value = "合约平台")
+    private String platform;
+
+
+    @ApiModelProperty(value = "语言类型")
+    private String language;
 
     @ApiModelProperty(value = "大分类")
     private String mt;
@@ -44,7 +49,7 @@ public class ContractBase extends BaseEntity {
     private String st;
 
     @ApiModelProperty(value = "合约等级")
-    private String grade;
+    private Integer grade;
 
     @ApiModelProperty(value = "介绍")
     private String description;
@@ -59,10 +64,13 @@ public class ContractBase extends BaseEntity {
     private String auditStatus;
 
     @ApiModelProperty(value = "发布状态")
-    private Integer publishStatus;
+    private String publishStatus;
+
+    @ApiModelProperty(value = "文件地址")
+    private String file;
 
     @ApiModelProperty(value = "是否删除")
-    @TableField("is_deleted")
+    @TableField(value = "is_deleted", fill = FieldFill.INSERT)
     @TableLogic
     private Boolean deleted;
 }

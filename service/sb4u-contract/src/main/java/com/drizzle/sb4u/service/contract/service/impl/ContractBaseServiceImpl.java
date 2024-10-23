@@ -31,15 +31,17 @@ public class ContractBaseServiceImpl extends ServiceImpl<ContractBaseMapper, Con
 
         LambdaQueryWrapper<ContractBase> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         // 公司名称
-        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getCompanyName()), ContractBase::getCompanyName, contractQueryVo.getCompanyName());
-        // 合约标签
-        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getTag()), ContractBase::getTag, contractQueryVo.getTag());
+        lambdaQueryWrapper.like(StringUtils.isNotEmpty(contractQueryVo.getCompanyName()), ContractBase::getCompanyName, contractQueryVo.getCompanyName());
+        // 语言类型
+        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getLanguage()), ContractBase::getLanguage, contractQueryVo.getLanguage());
+        // 运行平台
+        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getPlatform()), ContractBase::getPlatform, contractQueryVo.getPlatform());
         // 大分类
         lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getMt()), ContractBase::getMt, contractQueryVo.getMt());
         // 小分类
         lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getSt()), ContractBase::getSt, contractQueryVo.getSt());
         // 合约等级
-        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getGrade()), ContractBase::getGrade, contractQueryVo.getGrade());
+        lambdaQueryWrapper.eq(contractQueryVo.getGrade() != null, ContractBase::getGrade, contractQueryVo.getGrade());
         // 合约名称
         lambdaQueryWrapper.like(StringUtils.isNotEmpty(contractQueryVo.getName()), ContractBase::getName, contractQueryVo.getName());
         // 审核状态

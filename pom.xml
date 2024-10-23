@@ -147,6 +147,7 @@
                 <artifactId>minio</artifactId>
                 <version>${minio.version}</version>
             </dependency>
+
             <!--google推荐的一套工具类库-->
             <dependency>
                 <groupId>com.google.guava</groupId>

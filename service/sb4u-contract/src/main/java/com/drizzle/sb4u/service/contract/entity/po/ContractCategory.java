@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author drizzle
- * @since 2024-10-08
+ * @since 2024-10-24
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -39,6 +39,9 @@ public class ContractCategory extends BaseEntity {
     @ApiModelProperty(value = "是否显示该分类，0为不显示，1为显示")
     @TableField("is_show")
     private Boolean show;
+
+    @ApiModelProperty(value = "排序值，值越大排序越靠后")
+    private Integer orderby;
 
     @ApiModelProperty(value = "是否是叶子节点，0为非叶子节点，1为叶子节点")
     @TableField("is_leaf")

@@ -30,24 +30,20 @@ public class ContractBaseServiceImpl extends ServiceImpl<ContractBaseMapper, Con
     public IPage<ContractBase> selectPage(PageParams pageParams, QueryContractBaseDto contractQueryVo) {
 
         LambdaQueryWrapper<ContractBase> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        // 公司名称
-        lambdaQueryWrapper.like(StringUtils.isNotEmpty(contractQueryVo.getCompanyName()), ContractBase::getCompanyName, contractQueryVo.getCompanyName());
+
         // 语言类型
-        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getLanguage()), ContractBase::getLanguage, contractQueryVo.getLanguage());
+        lambdaQueryWrapper.like(StringUtils.isNotEmpty(contractQueryVo.getLanguage()), ContractBase::getLanguage, contractQueryVo.getLanguage());
         // 运行平台
-        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getPlatform()), ContractBase::getPlatform, contractQueryVo.getPlatform());
-        // 大分类
-        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getMt()), ContractBase::getMt, contractQueryVo.getMt());
-        // 小分类
-        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getSt()), ContractBase::getSt, contractQueryVo.getSt());
+        lambdaQueryWrapper.like(StringUtils.isNotEmpty(contractQueryVo.getPlatform()), ContractBase::getPlatform, contractQueryVo.getPlatform());
+        // 审计状态
+        lambdaQueryWrapper.eq(contractQueryVo.getStatus() != null, ContractBase::getStatus, contractQueryVo.getStatus());
         // 合约等级
         lambdaQueryWrapper.eq(contractQueryVo.getGrade() != null, ContractBase::getGrade, contractQueryVo.getGrade());
         // 合约名称
         lambdaQueryWrapper.like(StringUtils.isNotEmpty(contractQueryVo.getName()), ContractBase::getName, contractQueryVo.getName());
         // 审核状态
         lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getAuditStatus()), ContractBase::getAuditStatus, contractQueryVo.getAuditStatus());
-        // 发布状态
-        lambdaQueryWrapper.eq(contractQueryVo.getPublishStatus() != null, ContractBase::getPublishStatus, contractQueryVo.getPublishStatus());
+
 
         Page<ContractBase> page = new Page<>(pageParams.getPageNo(), pageParams.getPageSize());
         IPage<ContractBase> contractBasePage = contractBaseMapper.selectPage(page, lambdaQueryWrapper);

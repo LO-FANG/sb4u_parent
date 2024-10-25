@@ -20,20 +20,15 @@ public class QueryContractBaseDto implements Serializable {
 
     @ApiModelProperty("合约名称")
     private String name;
-    @ApiModelProperty("公司名称")
-    private String companyName;
     @ApiModelProperty("语言类型")
     private String language;
     @ApiModelProperty("运行平台")
     private String platform;
-    @ApiModelProperty("大分类")
-    private String mt;
-    @ApiModelProperty("小分类")
-    private String st;
     @ApiModelProperty("等级")
     private Integer grade;
     @ApiModelProperty("审核状态")
     private String auditStatus;
-    @ApiModelProperty("发布状态")
-    private Integer publishStatus;
+    @ApiModelProperty("审计状态")
+    private Integer status;
+
 }

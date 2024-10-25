@@ -1,7 +1,7 @@
 package com.drizzle.sb4u.service.contract.service;
 
-import com.drizzle.sb4u.service.contract.entity.po.ContractCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.drizzle.sb4u.service.contract.entity.po.ContractCategory;
 
 /**
  * <p>

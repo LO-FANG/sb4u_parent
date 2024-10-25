@@ -103,7 +103,7 @@ public class ContractBaseController {
         BeanUtils.copyProperties(addContractBaseDto, contractBase);
 
         contractBase.setAuditStatus("80001");
-        contractBase.setPublishStatus("90001");
+        contractBase.setStatus(1);
 
         boolean save = contractBaseService.save(contractBase);
 

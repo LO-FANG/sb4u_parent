@@ -2,7 +2,6 @@ package com.drizzle.sb4u.service.contract.entity.dto;
 
 import com.drizzle.sb4u.service.contract.entity.po.ContractBase;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**

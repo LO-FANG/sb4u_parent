@@ -1,7 +1,7 @@
 package com.drizzle.sb4u.service.contract.mapper;
 
-import com.drizzle.sb4u.service.contract.entity.po.ContractBase;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.drizzle.sb4u.service.contract.entity.po.ContractBase;
 
 /**
  * <p>

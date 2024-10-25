@@ -26,8 +26,6 @@ public class QueryContractBaseDto implements Serializable {
     private String platform;
     @ApiModelProperty("等级")
     private Integer grade;
-    @ApiModelProperty("审核状态")
-    private String auditStatus;
     @ApiModelProperty("审计状态")
     private Integer status;
 

@@ -1,5 +1,6 @@
 package com.drizzle.sb4u.service.contract.entity.po;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.drizzle.sb4u.service.base.model.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableLogic;
@@ -43,19 +44,16 @@ public class ContractBase extends BaseEntity {
     @ApiModelProperty(value = "更新者")
     private String updatePeople;
 
-    @ApiModelProperty(value = "审核状态")
-    private String auditStatus;
-
     @ApiModelProperty(value = "是否删除")
-    @TableField("is_deleted")
+    @TableField(value = "is_deleted", fill = FieldFill.INSERT)
     @TableLogic
     private Boolean deleted;
 
     @ApiModelProperty(value = "合约名称")
     private String name;
 
-    @ApiModelProperty(value = "合约文件路径")
-    private String file;
+    @ApiModelProperty(value = "合约文件id")
+    private String fileId;
 
     @ApiModelProperty(value = "合约审计状态（1表示未审计，2表示审计中，3表示已审计）")
     private Integer status;

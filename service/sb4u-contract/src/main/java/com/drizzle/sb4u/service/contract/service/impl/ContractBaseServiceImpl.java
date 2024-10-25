@@ -41,8 +41,6 @@ public class ContractBaseServiceImpl extends ServiceImpl<ContractBaseMapper, Con
         lambdaQueryWrapper.eq(contractQueryVo.getGrade() != null, ContractBase::getGrade, contractQueryVo.getGrade());
         // 合约名称
         lambdaQueryWrapper.like(StringUtils.isNotEmpty(contractQueryVo.getName()), ContractBase::getName, contractQueryVo.getName());
-        // 审核状态
-        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(contractQueryVo.getAuditStatus()), ContractBase::getAuditStatus, contractQueryVo.getAuditStatus());
 
 
         Page<ContractBase> page = new Page<>(pageParams.getPageNo(), pageParams.getPageSize());

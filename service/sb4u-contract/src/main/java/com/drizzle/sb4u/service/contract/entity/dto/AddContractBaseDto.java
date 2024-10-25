@@ -40,8 +40,8 @@ public class AddContractBaseDto{
     @ApiModelProperty("审计状态")
     private Integer status;
 
-    @ApiModelProperty(value = "附件地址")
-    public String file;
+    @ApiModelProperty(value = "合约文件Id")
+    public String fileId;
 
     @ApiModelProperty(value = "是否删除")
     @TableField("is_deleted")

@@ -8,6 +8,7 @@ import com.drizzle.sb4u.service.contract.entity.dto.AddContractBaseDto;
 import com.drizzle.sb4u.service.contract.entity.dto.QueryContractBaseDto;
 import com.drizzle.sb4u.service.contract.entity.dto.UpdateContractBaseDto;
 import com.drizzle.sb4u.service.contract.entity.po.ContractBase;
+import com.drizzle.sb4u.service.contract.feignclient.MinioServiceClient;
 import com.drizzle.sb4u.service.contract.service.ContractBaseService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -33,6 +34,9 @@ public class ContractBaseController {
     @Autowired
     private ContractBaseService contractBaseService;
 
+    @Autowired
+    private MinioServiceClient minioServiceClient;
+
     @ApiOperation("所有智能合约列表")
     @GetMapping("/list")
     public R listAll() {
@@ -54,11 +58,19 @@ public class ContractBaseController {
     @ApiOperation(value = "根据ID删除智能合约", notes = "根据ID删除智能合约")
     @DeleteMapping("/remove/{id}")
     public R removeById(@ApiParam(value = "智能合约ID", required = true) @PathVariable("id") String id) {
-        boolean b = contractBaseService.removeById(id);
-        if(b) {
-            return R.ok().message("删除成功");
+        ContractBase contractBase = contractBaseService.getById(id);
+        // 获取合约文件id
+        String fileId = contractBase.getFileId();
+        boolean delete = minioServiceClient.delete(fileId);
+        if(delete) {
+            boolean b = contractBaseService.removeById(id);
+            if(b) {
+                return R.ok().message("删除成功");
+            } else {
+                return R.error().message("从minio删除文件成功，数据库记录删除失败");
+            }
         } else {
-            return R.error().message("删除失败");
+            return R.error().message("从minio删除文件失败");
         }
     }
 
@@ -102,7 +114,6 @@ public class ContractBaseController {
         ContractBase contractBase = new ContractBase();
         BeanUtils.copyProperties(addContractBaseDto, contractBase);
 
-        contractBase.setAuditStatus("80001");
         contractBase.setStatus(1);
 
         boolean save = contractBaseService.save(contractBase);
